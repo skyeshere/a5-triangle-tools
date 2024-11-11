@@ -1,0 +1,12 @@
+let
+	var a: Integer;
+	var b: Integer
+in
+	begin
+		getint(var a);
+		getint(var b);
+		
+		if (a + b) = (a * b)
+		then begin put('s'); put('a'); put('m'); put('e'); put('!') end
+		else put(' ');
+	end
