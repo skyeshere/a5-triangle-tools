@@ -105,6 +105,7 @@ import triangle.abstractSyntaxTrees.vnames.SimpleVname;
 import triangle.abstractSyntaxTrees.vnames.SubscriptVname;
 import triangle.abstractSyntaxTrees.vnames.Vname;
 import triangle.codeGenerator.entities.AddressableEntity;
+import triangle.codeGenerator.entities.BarPrimitiveRoutine;
 import triangle.codeGenerator.entities.EqualityRoutine;
 import triangle.codeGenerator.entities.FetchableEntity;
 import triangle.codeGenerator.entities.Field;
@@ -714,6 +715,12 @@ public final class Encoder implements ActualParameterVisitor<Frame, Integer>,
 	private final void elaborateStdEqRoutine(Declaration routineDeclaration, Primitive primitive) {
 		routineDeclaration.entity = new EqualityRoutine(Machine.closureSize, primitive);
 		writeTableDetails(routineDeclaration);
+	} 
+
+	private final void elaborateStdBarRoutine(Declaration routineDeclaration)
+	{
+		StdEnvironment.barDecl.entity = new BarPrimitiveRoutine();
+		writeTableDetails(routineDeclaration);
 	}
 
 	/**
@@ -730,6 +737,7 @@ public final class Encoder implements ActualParameterVisitor<Frame, Integer>,
 		elaborateStdPrimRoutine(StdEnvironment.notDecl, Primitive.NOT);
 		elaborateStdPrimRoutine(StdEnvironment.andDecl, Primitive.AND);
 		elaborateStdPrimRoutine(StdEnvironment.orDecl, Primitive.OR);
+		elaborateStdBarRoutine(StdEnvironment.barDecl);
 		elaborateStdConst(StdEnvironment.maxintDecl, Machine.maxintRep);
 		elaborateStdPrimRoutine(StdEnvironment.addDecl, Primitive.ADD);
 		elaborateStdPrimRoutine(StdEnvironment.subtractDecl, Primitive.SUB);
